@@ -1,5 +1,5 @@
+import os
 LOG_FILE = "logs.json"
-MENU_ACTIONS = {}
 
 def load_memories() -> list:
     """
@@ -68,8 +68,34 @@ def generate_report():
     """
     pass
 
+def exit_menu():
+    print("-----Goodbye-----")
+    SystemExit
+    
+MENU_ACTIONS = {
+    "1": add_memory,
+    "2": show_memories,
+    "3": generate_report,
+    "4": exit_menu
+}
+
+
 def main():
-    pass
+    while True:
+        print("""
+    1. Add Memory/Emotion
+    2. Show All
+    3. Generate Simple Report
+    4. Exit
+                """)
+        choice = input("Choose: ").strip()
+        action = MENU_ACTIONS.get(choice)
+        if action:
+            action()
+        else:
+            print("Invalid input")
+            print("-" * 20)
+            continue
 
 if __name__ == '__main__':
     main()
