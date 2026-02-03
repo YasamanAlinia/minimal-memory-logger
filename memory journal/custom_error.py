@@ -1,0 +1,2 @@
+class TextTooShortError(ValueError):
+    pass
