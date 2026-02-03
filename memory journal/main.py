@@ -1,4 +1,6 @@
 import os
+import json
+
 LOG_FILE = "logs.json"
 
 def load_memories() -> list:
@@ -11,7 +13,15 @@ def load_memories() -> list:
     Returns:
         list: A list of memory dictionaries, each containing 'text' and 'created_at' keys.
     """
-    pass
+    if not os.path.exists(LOG_FILE):
+        return []
+    
+    with open(LOG_FILE, 'r', encoding='utf-8') as file:
+        try:
+            return json.load(file)
+        
+        except (json.JSONDecodeError, TypeError):
+            return []
 
 def save_memory(memory) -> None:
     """
