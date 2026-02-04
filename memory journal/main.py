@@ -40,6 +40,15 @@ def save_memory(memory) -> None:
     Returns:
         None
     """
+    memories = load_memories()
+
+    if not isinstance(memories, list):
+        memories = []
+
+    memories.append(memory)
+
+    with open(LOG_FILE, 'w', encoding='utf-8') as file:
+        json.dump(memories, file, ensure_ascii=False, indent=2)
 
 def add_memory() -> None:
     """
