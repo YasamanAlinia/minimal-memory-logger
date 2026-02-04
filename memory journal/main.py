@@ -1,5 +1,9 @@
+from memory_validator import text_validator
+from custom_error import TextTooShortError
+from datetime import datetime
 import os
 import json
+
 
 LOG_FILE = "logs.json"
 
@@ -36,7 +40,6 @@ def save_memory(memory) -> None:
     Returns:
         None
     """
-    pass
 
 def add_memory() -> None:
     """
@@ -51,7 +54,22 @@ def add_memory() -> None:
     Raises:
         TextTooShortError: If the entered memory text is too short.
     """
-    pass
+    row_memory = input("--Write your memory--\n ").strip()
+
+    try:
+        text_validator(row_memory)
+    except TextTooShortError as error:
+        print(error)
+        return
+    
+    memory = {
+        'text': row_memory,
+        'date': datetime.now().strftime("%y-%m-%d %H:%M")
+    }
+
+    save_memory(memory)
+
+    print(f"--memory made successfully!--")
 
 def show_memories() -> None:
     """
