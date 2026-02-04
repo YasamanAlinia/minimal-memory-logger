@@ -1,6 +1,7 @@
 from memory_validator import text_validator
 from custom_error import TextTooShortError
 from datetime import datetime
+from collections import Counter
 import os
 import json
 
@@ -130,7 +131,27 @@ def generate_report():
     Returns:
         None
     """
-    pass
+    memories = load_memories()
+
+    if not memories:
+        print("--No memories found--")
+        return
+    
+    total_memories = len(memories)
+    lengths = [len(memory['text']) for memory in memories]
+    average_length = sum(lengths) // len(lengths)
+    all_text = " ".join(memory['text'].lower() for memory in memories)
+    words = [word.strip(".,!?%@#&$") for word in all_text.split()]
+    common_words = Counter(words).most_common(5)
+
+    print(f'Total memories: {total_memories}')
+    print(f"Average memory size: {average_length}")
+    
+    print("--Most 5 common used words--")
+    for index, word in enumerate(common_words, start=1):
+        print(f"{index}- {word[0]}")
+
+    print("-" * 20)
 
 def exit_menu():
     print("-----Goodbye-----")
