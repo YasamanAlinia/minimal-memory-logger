@@ -87,7 +87,34 @@ def show_memories() -> None:
     Returns:
         None       
     """
-    pass
+    memories = load_memories()
+    for index, memory in enumerate(memories, start=1):
+        preview = memory['text'][:50].replace('\n', ' ')
+        print(f"{index}. {preview}...")
+        print(f"created at - {memory['date']}")
+        print("-" * 20)
+
+    choice = input(
+    "\nEnter memory number to read full text (or press Enter to return): "
+        ).strip()
+    
+    if not choice:
+        return
+    
+    if not choice.isdigit():
+        print("Invalid input.")
+        return
+    
+    memory_index = int(choice) - 1
+    if memory_index < 0 or memory_index >= len(memories):
+        print("Invalid memory number.")
+        return
+    
+    print("\n" + "-" * 20)
+    print(memories[memory_index]["text"])
+    print("-" * 20)
+    
+    
 
 def generate_report():
     """
