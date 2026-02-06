@@ -154,7 +154,7 @@ def generate_report():
     print("-" * 20)
 
 def exit_menu():
-    assert SystemExit("-----Goodbye-----")
+    raise SystemExit("-----Goodbye-----")
     
 MENU_ACTIONS = {
     "1": add_memory,
