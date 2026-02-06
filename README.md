@@ -5,7 +5,7 @@ A simple CLI Python project to log and view memories in JSON.
 ---
 ## Demo
 
-### ![CLI Demo](./demo/demo.svg)
+![CLI Demo](./demo/demo.svg)
 
 ---
 
