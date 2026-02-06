@@ -7,3 +7,4 @@ logs.json
 .idea/
 .DS_Store
 Thumbs.db
+*.cast
